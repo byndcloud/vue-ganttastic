@@ -20,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+// This is used in the template tag
+import teleport from "vue2-teleport"
 import { computed, toRefs, ref, watch, nextTick } from "vue"
 
 import type { GanttBarObject } from "../types"
@@ -84,6 +86,8 @@ const tooltipContent = computed(() => {
   const barEndFormatted = toDayjs(barEndRaw.value).format(format)
   return `${barStartFormatted} \u2013 ${barEndFormatted}`
 })
+
+/* @vue/component */
 </script>
 
 <style>
