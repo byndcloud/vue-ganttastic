@@ -2,7 +2,7 @@
   <div class="g-grid-container">
     <div
       v-for="{ label, value, width } in timeaxisUnits.lowerUnits"
-      :key="label"
+      :key="label + '_' + value"
       class="g-grid-line"
       :style="{
         width,
