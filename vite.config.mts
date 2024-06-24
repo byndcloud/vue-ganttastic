@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from "node:url"
 
 import { defineConfig } from "vite"
-import vue from "@vitejs/plugin-vue"
+import vue from "@vitejs/plugin-vue2"
 import postcssPresetEnv from "postcss-preset-env"
 import styleInject from "@senojs/rollup-plugin-style-inject"
 
@@ -20,6 +20,7 @@ export default defineConfig({
   },
   build: {
     lib:
+      // eslint-disable-next-line no-undef
       process.env.NODE_ENV === "production"
         ? {
             entry: fileURLToPath(
@@ -29,6 +30,7 @@ export default defineConfig({
             fileName: "vue-ganttastic"
           }
         : undefined,
+    // eslint-disable-next-line no-undef
     outDir: process.env.NODE_ENV === "production" ? "lib" : "dist",
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
