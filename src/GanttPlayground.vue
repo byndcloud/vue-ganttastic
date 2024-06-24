@@ -3,7 +3,7 @@
     <g-gantt-chart
       :chart-start="chartStart"
       :chart-end="chartEnd"
-      precision="week"
+      precision="month"
       :row-height="40"
       grid
       current-time
@@ -21,6 +21,7 @@
       @dragend-bar="onDragendBar($event.bar, $event.e, $event.movedBars)"
       @contextmenu-bar="onContextmenuBar($event.bar, $event.e, $event.datetime)"
     >
+      <g-gantt-row label="Nathan's row" :bars="yearBars" highlight-on-hover />
       <g-gantt-row label="My row to test" :bars="bars1" highlight-on-hover />
       <g-gantt-row label="My another new row to test" highlight-on-hover :bars="bars2" />
       <g-gantt-row label="just another row to test gantt" highlight-on-hover :bars="bars3" />
@@ -41,10 +42,30 @@ import { ref } from "vue"
 import type { GanttBarObject } from "./types"
 import dayjs from "dayjs"
 
-const format = ref("DD.MM.YYYY HH:mm")
-const chartStart = ref(dayjs().startOf("day").format(format.value))
-const chartEnd = ref(
-  dayjs(chartStart.value, format.value).add(3, "days").hour(12).format(format.value)
+// The format also controls the how much time changes when dragging or resizing
+// a bar.
+// That is, if the format were "DD.MM.YYYY HH:mm", dragging a bar would change
+// the time by minutes, not days.
+// Amazing!!!
+const format = ref("DD.MM.YYYY")
+const chartStart = ref(dayjs().startOf("month").format(format.value))
+const chartEnd = ref(dayjs(chartStart.value, format.value).add(2, "month").format(format.value))
+
+// List of 12 bars, each representing a month
+const yearBars = ref(
+  Array.from({ length: 6 }, (_, i) => {
+    const start = dayjs().startOf("month").add(i, "month").format(format.value)
+    const end = dayjs(start, format.value).endOf("month").format(format.value)
+    return {
+      beginDate: start,
+      endDate: end,
+      ganttBarConfig: {
+        id: `month-${i + 1}`,
+        label: `${i + 1}`,
+        hasHandles: true
+      }
+    }
+  })
 )
 
 const bars1 = ref<GanttBarObject[]>([
