@@ -1,4 +1,4 @@
-import type { Plugin } from "vue"
+import type { PluginObject } from "vue"
 import dayjs from "dayjs"
 import isoWeek from "dayjs/plugin/isoWeek"
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js"
@@ -26,8 +26,7 @@ export function extendDayjs() {
 
 export type { ColorScheme, GanttBarObject }
 export { GGanttChart, GGanttRow }
-
-export const ganttastic: Plugin = {
+export const ganttastic: PluginObject<never> = {
   install(app, options?) {
     extendDayjs()
     app.component("GGanttChart", GGanttChart)
