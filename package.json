@@ -1,8 +1,8 @@
 {
-  "name": "@infectoone/vue-ganttastic",
+  "name": "@byndcloud/vue-ganttastic",
   "version": "2.3.2",
   "description": "A simple and customizable Gantt chart component for Vue.js",
-  "author": "Marko Zunic (@zunnzunn)",
+  "author": "Beyond Co. (Initial version by Marko Zunic (@zunnzunn))",
   "scripts": {
     "serve": "vite",
     "build": "npm run build:types && npm run build:lib",
