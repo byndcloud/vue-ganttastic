@@ -6,6 +6,7 @@
       precision="month"
       :row-height="40"
       grid
+      no-overlap
       current-time
       width="100%"
       bar-start="beginDate"

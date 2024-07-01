@@ -168,9 +168,13 @@ const getChartRows = () => {
   if (!defaultSlot) {
     return allBars
   }
+  // TODO: This method must return an array of ChartRows as defined above. It
+  // worked  with vue 3, but doesn't work with vue 2. This code is essential to
+  // make "bundle" and "push-on-overlap" work.
   defaultSlot.forEach((child) => {
-    if (child.props?.bars) {
-      const { label, bars } = child.props
+    const propsData = (child?.componentOptions?.propsData || {}) as ChartRow
+    if (propsData) {
+      const { label, bars } = propsData
       allBars.push({ label, bars })
       // if using v-for to generate rows, rows will be children of a single "fragment" v-node:
     } else if (Array.isArray(child.children)) {
